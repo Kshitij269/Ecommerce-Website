@@ -1,59 +1,53 @@
-import React from "react";
-import "./aboutSection.css";
-import { Button, Typography, Avatar } from "@mui/material";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// src/components/About/About.jsx
+import React from 'react';
+import './aboutSection.css';
+import { FaCheckCircle } from 'react-icons/fa';
+// import TeamImage from '../../assets/team.jpg'; // Replace with your image path
+// import StoreImage from '../../assets/store.jpg'; // Replace with your image path
 
-const About = () => {
-  const visitInstagram = () => {
-    window.location.href = "https://instagram.com/meabhisingh";
-  };
-
+function About() {
   return (
-    <div className="aboutSection">
-      <div></div>
-      <div className="aboutSectionGradient"></div>
-      <div className="aboutSectionContainer">
-        <Typography component="h1">About Us</Typography>
+    <div className="about-page">
+      <div className="about-header">
+        <h1>About Us</h1>
+        <p>Learn more about our journey and values.</p>
+      </div>
 
-        <div>
-          <div>
-            <Avatar
-              style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-              src="https://res.cloudinary.com/tripleayt/image/upload/v1631555947/products/jpyibarlaxawvcvqjv5b.png"
-              alt="Founder"
-            />
-            <Typography>Abhishek Singh</Typography>
-            <Button onClick={visitInstagram} color="primary">
-              Visit Instagram
-            </Button>
-            <span>
-              This is a sample website made by @meabhisingh. Only with the
-              purpose to teach MERN Stack on the channel 6 Pack Programmer.
-            </span>
+      <div className="about-content">
+        <section className="about-section">
+          <div className="about-text">
+            <h2>Our Story</h2>
+            <p>
+              We started as a small family-run business in 2010, with a passion for delivering quality products to our customers. Over the years, we have grown into a trusted name in the eCommerce industry, thanks to our commitment to excellence and customer satisfaction.
+            </p>
+            <ul>
+              <li><FaCheckCircle className="about-icon" /> Quality Products</li>
+              <li><FaCheckCircle className="about-icon" /> Exceptional Customer Service</li>
+              <li><FaCheckCircle className="about-icon" /> Fast and Reliable Delivery</li>
+            </ul>
           </div>
-          <div className="aboutSectionContainer2">
-            <Typography component="h2">Our Brands</Typography>
-            <a
-              href="https://www.youtube.com/channel/UCO7afj9AUo0zV69pqEYhcjw"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <YouTubeIcon className="youtubeSvgIcon" />
-            </a>
+          {/* <div className="about-image">
+            <img src={StoreImage} alt="Our Store" />
+          </div> */}
+        </section>
 
-            <a
-              href="https://instagram.com/meabhisingh"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstagramIcon className="instagramSvgIcon" />
-            </a>
+        <section className="about-section reverse">
+          <div className="about-text">
+            <h2>Meet Our Team</h2>
+            <p>
+              Our team is the heart of our company. Each member brings their unique talents and dedication to ensure that our customers receive the best possible experience.
+            </p>
+            <p>
+              From our friendly customer service representatives to our skilled warehouse staff, we work together to make sure you get the products you love, delivered right to your door.
+            </p>
           </div>
-        </div>
+          {/* <div className="about-image">
+            <img src={TeamImage} alt="Our Team" />
+          </div> */}
+        </section>
       </div>
     </div>
   );
-};
+}
 
 export default About;
