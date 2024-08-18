@@ -6,6 +6,11 @@ import Layout from "./Layout.jsx";
 import Home from "./components/Home/Home.jsx";
 import Contact from "./components/layout/Contact/Contact.jsx";
 import About from "./components/layout/About/About.jsx";
+<<<<<<< HEAD
+=======
+import store from "./store";
+import { Provider } from "react-redux";
+>>>>>>> c885bba4e29fa493f8cdeb0fd0e2b823e7b27445
 
 const router = createBrowserRouter([
   {
@@ -29,7 +34,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </Provider>
 );
