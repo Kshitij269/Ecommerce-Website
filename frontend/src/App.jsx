@@ -1,9 +1,19 @@
 import { useEffect } from "react";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
-import { BrowserRouter as Router,Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
 import WebFont from "webfontloader";
 import Home from "./components/Home/Home";
+import Contact from "./components/layout/Contact/Contact";
+import About from "./components/layout/About/About";
+import Products from "./components/Product/Products";
+import Layout from "./Layout";
+
 function App() {
   useEffect(() => {
     WebFont.load({
@@ -11,16 +21,13 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-
-    
   }, []);
+
   return (
     <>
-      <Router>
-        <Header></Header>
-        <Route path="/" exact component={Home}></Route>
-        <Footer></Footer>
-      </Router>
+      <Header />
+      <Home></Home>
+      <Footer />
     </>
   );
 }
