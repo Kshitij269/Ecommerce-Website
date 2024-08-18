@@ -1,40 +1,34 @@
-import React, { Fragment, useEffect } from "react";
-import "./Home.css";
-import ProductCard from "./ProductCard";
-import MetaData from "../layout/MetaData";
-import { clearErrors, getProduct } from "../../actions/productAction";
-import { useSelector, useDispatch } from "react-redux";
-import Loader from "../layout/Loader/Loader";
-import { useAlert } from "react-alert";
+import React from "react";
 
-const Home = () => {
-  const alert = useAlert();
-  const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.products);
+import "./Home.css"
 
+
+// const product={
+//   name:T-shirt,
+//   price:20.99,
+//   image:[{url:"https://png.pngtree.com/png-vector/20220527/ourmid/pngtree-unisex-bright-blue-t-shirt-mock-up-png-image_4757174.png"}],
+//   _id:"abhishek",
+// };
+
+const Home=()=>{
   return (
-    <Fragment>
+    <>
       <div className="banner">
         <p>Welcome to Ecommerce</p>
-        <h1>FIND AMAZING PRODUCTS BELOW</h1>
-
+        <h1>Find amazing products below</h1>
         <a href="#container">
           <button>
-            Scroll <CgMouse />
+            {/* Scroll <CgMouse/> */}
           </button>
         </a>
       </div>
-
       <h2 className="homeHeading">Featured Products</h2>
-
       <div className="container" id="container">
-        {products &&
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+        {/* <Product product={product} /> */}
       </div>
-    </Fragment>
-  );
-};
+
+    </>
+  )
+}
 
 export default Home;

@@ -11,7 +11,7 @@ import WebFont from "webfontloader";
 import Home from "./components/Home/Home";
 import Contact from "./components/layout/Contact/Contact";
 import About from "./components/layout/About/About";
-import Products from "./components/Product/Products";
+
 import Layout from "./Layout";
 
 function App() {
