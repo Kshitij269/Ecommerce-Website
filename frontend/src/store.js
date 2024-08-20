@@ -12,23 +12,49 @@
 // );
 // export default store;
 
-import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import yourSliceReducer from './yourSlice'; // Import your slices here
+// import { configureStore } from '@reduxjs/toolkit';
+// import {thunk} from 'redux-thunk';
+// import productsReducer from './reducers/productReducers'; // Import your slices here
 
+// const store = configureStore({
+//   reducer: {
+//     // Add your reducers here
+//     yourSliceName: productsReducer,
+//   },
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware().concat(thunk), // Optional if you want to add thunk (already included by default)
+//   devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools in development mode
+// });
+
+// export default store;
+
+
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {productsReducer} from './reducers/productReducers'; // Import your slices here
+
+// Combine reducers
+const reducer = combineReducers({
+  products: productsReducer,
+});
+
+// Define the initial state if necessary
+const initialState = {
+  products: {
+    loading: false, // Ensure this is defined in your initial state
+    data: [],
+    error: null,
+  }
+};
+
+// Configure the store
 const store = configureStore({
-  reducer: {
-    // Add your reducers here
-    yourSliceName: yourSliceReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(thunk), // Optional if you want to add thunk (already included by default)
-  devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools in development mode
+  reducer,
+  preloadedState: initialState, // Preloaded state if necessary
+  // Middleware is automatically included by default, including thunk
+  // But you can customize the middleware if needed
 });
 
 export default store;
-
-
 
 
 
