@@ -13,8 +13,8 @@
 // export default store;
 
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import yourSliceReducer from './yourSlice'; // Import your slices here
+
+import yourSliceReducer from "./reducers/slice" // Import your slices here
 
 const store = configureStore({
   reducer: {
@@ -22,18 +22,11 @@ const store = configureStore({
     yourSliceName: yourSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(thunk), // Optional if you want to add thunk (already included by default)
+    getDefaultMiddleware(), // Optional if you want to add thunk (already included by default)
   devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools in development mode
 });
 
 export default store;
-
-
-
-
-
-
-
 
 
 

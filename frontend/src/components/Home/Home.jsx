@@ -27,12 +27,16 @@ const product = [
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector(
+  const { products,error,loading } = useSelector(
     (state) => state.products
   );
   // const { loading, error, products, productCount } = useSelector(
   //   (state) => state.products
   // );
+
+  if(!products){
+    console.error("Product is not defined")
+  }
 
   useEffect(() => {
     dispatch(getProduct());
