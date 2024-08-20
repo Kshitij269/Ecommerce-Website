@@ -30,11 +30,13 @@
 
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import {productsReducer} from './reducers/productReducers'; // Import your slices here
+import {productsReducer,productDetailsReducer} from './reducers/productReducers'; // Import your slices here
+
 
 // Combine reducers
 const reducer = combineReducers({
   products: productsReducer,
+  productDetails: productDetailsReducer,
 });
 
 // Define the initial state if necessary
@@ -88,4 +90,3 @@ export default store;
 // });
 
 // export default store;
-
