@@ -1,67 +1,68 @@
 import React, { Fragment, useEffect } from "react";
-import Product from "./Product";
-import "./Home.css";
 import { CgMouse } from "react-icons/cg";
+import "./Home.css";
+import ProductCard from "./Product.jsx";
 import MetaData from "../layout/MetaData";
-import { getProduct } from "../../actions/ProductAction";
-import { useDispatch, useSelector } from "react-redux";
-
-// const initialState = {
-//   loading: false, // Ensure this is defined in your initial state
-//   data: [],
-//   error: null,
-// };
-
-const product = [
-  {
-    name: "T-shirt",
-    price: "20.99",
-    images: [
-      {
-        url: "https://picsum.photos/seed/picsum/200/300",
-      },
-    ],
-    _id: "abhishek",
-  },
-];
+import { clearErrors, getProduct } from "../../actions/productAction";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "../layout/Loader/Loader";
+import { useAlert } from "react-alert";
 
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const { products,error,loading } = useSelector(
     (state) => state.products
   );
   // const { loading, error, products, productCount } = useSelector(
   //   (state) => state.products
   // );
+=======
+  const { loading, error, products } = useSelector((state) => state.products);
+>>>>>>> 28360492b218da5a16b1fb910ad0ea94b9fe1529
 
   if(!products){
     console.error("Product is not defined")
   }
 
   useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
+
   return (
     <Fragment>
-      {/* {loading ? (
+      {loading ? (
         <Loader />
-      ) : ( */}
-      <Fragment>
-        <MetaData title="ECOMMERCE" />
-        <div className="banner">
-          <p>Welcome to Ecommerce</p>
-          <h1>Find amazing products below</h1>
-          <a href="#container">
-            <button>
-              Scroll <CgMouse />
-            </button>
-          </a>
-        </div>
-        <h2 className="homeHeading">Featured Products</h2>
-        <div className="container" id="container">
-          {products && products.map((product) => <Product product={product} />)}
-        </div>
-      </Fragment>
+      ) : (
+        <Fragment>
+          <MetaData title="ECOMMERCE" />
+
+          <div className="banner">
+            <p>Welcome to Ecommerce</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+
+            <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a>
+          </div>
+
+          <h2 className="homeHeading">Featured Products</h2>
+
+          <div className="container" id="container">
+            {products &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+          </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
