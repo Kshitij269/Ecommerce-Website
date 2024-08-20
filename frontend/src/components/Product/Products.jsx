@@ -9,6 +9,7 @@ import Slider from '@mui/material/Slider';
 import { useAlert } from "react-alert";
 import Typography from "@mui/material/Typography";
 import MetaData from "../layout/MetaData";
+import { useParams } from "react-router-dom";
 
 const categories = [
   "Laptop",
@@ -40,7 +41,7 @@ const Products = ({ match }) => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-  const keyword = match.params.keyword;
+  const { keyword } = useParams();
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
