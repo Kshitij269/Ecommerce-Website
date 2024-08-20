@@ -5,19 +5,17 @@ import { CgMouse } from "react-icons/cg";
 import MetaData from "../layout/MetaData";
 import { getProduct } from "../../actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
-import { createSlice } from "@reduxjs/toolkit";
-import Loader from "../layout/Loader/Loader";
 
-const initialState = {
-  loading: false, // Ensure this is defined in your initial state
-  data: [],
-  error: null,
-};
+// const initialState = {
+//   loading: false, // Ensure this is defined in your initial state
+//   data: [],
+//   error: null,
+// };
 
 const product = [
   {
     name: "T-shirt",
-    price: 20.99,
+    price: "20.99",
     images: [
       {
         url: "https://picsum.photos/seed/picsum/200/300",
@@ -28,6 +26,17 @@ const product = [
 ];
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector(
+    (state) => state.products
+  );
+  // const { loading, error, products, productCount } = useSelector(
+  //   (state) => state.products
+  // );
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
   return (
     <Fragment>
       {/* {loading ? (
@@ -46,9 +55,7 @@ const Home = () => {
         </div>
         <h2 className="homeHeading">Featured Products</h2>
         <div className="container" id="container">
-          <Product product={product} />
-          <Product product={product} />
-          {/* {products && products.map((product) => <Product product={product} />)} */}
+          {products && products.map((product) => <Product product={product} />)}
         </div>
       </Fragment>
     </Fragment>
