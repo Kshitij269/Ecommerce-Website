@@ -14,26 +14,31 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     })
 });
 
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-
-    const resultPerPage = 10;
-    const productCount = await Product.countDocuments();
-
+// Get All Product
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments();
 
     const apiFeature = new ApiFeatures(Product.find(), req.query)
-        .search()
-        .filter()
-        .pagination(resultPerPage);
-
-    const products = await apiFeature.query;
-
-
+      .search()
+      .filter();
+    
+    // Apply pagination
+    apiFeature.pagination(resultPerPage);
+  
+    const products = await apiFeature.query; // Execute the query once after pagination is applied
+  
+    const filteredProductsCount = products.length;
+  
     res.status(200).json({
-        message: "Route is working fine",
-        products,
-        productCount
-    })
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
 });
+
 
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     let product = Product.findById(req.params.id);
