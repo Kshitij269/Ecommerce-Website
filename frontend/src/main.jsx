@@ -1,5 +1,5 @@
 import React from "react";
-import "./store.js"
+import store from "./store.js";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout.jsx";
