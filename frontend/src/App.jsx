@@ -1,18 +1,13 @@
 import { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import WebFont from "webfontloader";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  createBrowserRouter,
-} from "react-router-dom";
-import WebFont from "webfontloader";
 import Home from "./components/Home/Home";
 import Contact from "./components/layout/Contact/Contact";
 import About from "./components/layout/About/About";
-
-import Layout from "./Layout";
+import Products from "./components/Product/Products"; // Ensure this is correctly imported
+import Search from "./components/Product/Search.jsx"; // Ensure this is correctly imported
 
 function App() {
   useEffect(() => {
@@ -24,11 +19,18 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Router>
       <Header />
-      <Home></Home>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:keyword" element={<Products />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 
