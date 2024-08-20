@@ -11,20 +11,7 @@ import { useAlert } from "react-alert";
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const { products,error,loading } = useSelector(
-    (state) => state.products
-  );
-  // const { loading, error, products, productCount } = useSelector(
-  //   (state) => state.products
-  // );
-=======
   const { loading, error, products } = useSelector((state) => state.products);
->>>>>>> 28360492b218da5a16b1fb910ad0ea94b9fe1529
-
-  if(!products){
-    console.error("Product is not defined")
-  }
 
   useEffect(() => {
     if (error) {

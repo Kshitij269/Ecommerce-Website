@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Carousel from "react-material-ui-carousel";
+import { Carousel } from 'react-responsive-carousel';
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
   getProductDetails,
   newReview,
 } from "../../actions/productAction";
-import ReviewCard from "./ReviewCard.js";
+import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
@@ -18,8 +18,8 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-} from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
+} from "@mui/material";
+import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
 
 const ProductDetails = ({ match }) => {
