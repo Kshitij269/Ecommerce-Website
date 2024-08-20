@@ -1,38 +1,23 @@
 import React from "react";
-import store from "./store.js";
-import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "./Layout.jsx";
-import Home from "./components/Home/Home.jsx";
-import Contact from "./components/layout/Contact/Contact.jsx";
-import About from "./components/layout/About/About.jsx";
-
+import ReactDOM from "react-dom";
+import App from "./App";
 import { Provider } from "react-redux";
+import store from "./store";
 
+import { positions, transitions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "contact",
-        element: <Contact />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
-    ],
-  },
-]);
+const options = {
+  timeout: 5000,
+  position: positions.BOTTOM_CENTER,
+  transition: transitions.SCALE,
+};
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.render(
   <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <App />
+    </AlertProvider>
+  </Provider>,
+  document.getElementById("root")
 );
