@@ -23,7 +23,8 @@ import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
 import { useParams } from "react-router-dom";
 
-const ProductDetails = () => {
+const ProductDetails = ({ match }) => {
+  const {id}=useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams(); // Replaces match.params.id
@@ -73,6 +74,7 @@ const ProductDetails = () => {
 
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
+    
 
     myForm.set("rating", rating);
     myForm.set("comment", comment);
@@ -98,9 +100,8 @@ const ProductDetails = () => {
     //   alert.success("Review Submitted Successfully");
     //   dispatch({ type: NEW_REVIEW_RESET });
     // }
-
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert]);
+  }, [dispatch, useParams(match), error, alert/*, reviewError, success*/]);
 
   return (
     <Fragment>
