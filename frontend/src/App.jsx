@@ -8,7 +8,7 @@ import Contact from "./components/layout/Contact/Contact";
 import About from "./components/layout/About/About";
 import Products from "./components/Product/Products"; // Ensure this is correctly imported
 import Search from "./components/Product/Search.jsx"; // Ensure this is correctly imported
-import ProductDetails from "./components/Product/ProductDetails.jsx"
+import ProductDetails from "./components/Product/ProductDetails"
 
 function App() {
   useEffect(() => {
