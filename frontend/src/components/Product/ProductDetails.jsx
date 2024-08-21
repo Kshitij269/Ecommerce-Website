@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,22 +21,24 @@ import {
 } from "@mui/material";
 import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { useParams } from "react-router-dom";
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const { id } = useParams(); // Replaces match.params.id
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
 
-  const { success, error: reviewError } = useSelector(
-    (state) => state.newReview
-  );
+  // const { success, error: reviewError } = useSelector(
+  //   (state) => state.newReview
+  // );
 
   const options = {
     size: "large",
-    value: product.ratings,
+    value: product?.ratings || 0, // Handle potential undefined product
     readOnly: true,
     precision: 0.5,
   };
@@ -61,12 +63,12 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
-    dispatch(addItemsToCart(match.params.id, quantity));
+    dispatch(addItemsToCart(id, quantity));
     alert.success("Item Added To Cart");
   };
 
   const submitReviewToggle = () => {
-    open ? setOpen(false) : setOpen(true);
+    setOpen(!open);
   };
 
   const reviewSubmitHandler = () => {
@@ -74,7 +76,7 @@ const ProductDetails = ({ match }) => {
 
     myForm.set("rating", rating);
     myForm.set("comment", comment);
-    myForm.set("productId", match.params.id);
+    myForm.set("productId", id);
 
     dispatch(newReview(myForm));
 
@@ -87,17 +89,18 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    if (reviewError) {
-      alert.error(reviewError);
-      dispatch(clearErrors());
-    }
+    // if (reviewError) {
+    //   alert.error(reviewError);
+    //   dispatch(clearErrors());
+    // }
 
-    if (success) {
-      alert.success("Review Submitted Successfully");
-      dispatch({ type: NEW_REVIEW_RESET });
-    }
-    dispatch(getProductDetails(match.params.id));
-  }, [dispatch, match.params.id, error, alert, reviewError, success]);
+    // if (success) {
+    //   alert.success("Review Submitted Successfully");
+    //   dispatch({ type: NEW_REVIEW_RESET });
+    // }
+
+    dispatch(getProductDetails(id));
+  }, [dispatch, id, error, alert]);
 
   return (
     <Fragment>
@@ -142,7 +145,7 @@ const ProductDetails = ({ match }) => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.Stock < 1}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -161,13 +164,13 @@ const ProductDetails = ({ match }) => {
                 Description : <p>{product.description}</p>
               </div>
 
-              <button onClick={submitReviewToggle} className="submitReview">
+              {/* <button onClick={submitReviewToggle} className="submitReview">
                 Submit Review
-              </button>
+              </button> */}
             </div>
           </div>
 
-          <h3 className="reviewsHeading">REVIEWS</h3>
+          {/* <h3 className="reviewsHeading">REVIEWS</h3>
 
           <Dialog
             aria-labelledby="simple-dialog-title"
@@ -200,16 +203,15 @@ const ProductDetails = ({ match }) => {
             </DialogActions>
           </Dialog>
 
-          {product.reviews && product.reviews[0] ? (
+          {product.reviews && product.reviews.length > 0 ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))}
+              {product.reviews.map((review) => (
+                <ReviewCard key={review._id} review={review} />
+              ))}
             </div>
           ) : (
             <p className="noReviews">No Reviews Yet</p>
-          )}
+          )} */}
         </Fragment>
       )}
     </Fragment>
