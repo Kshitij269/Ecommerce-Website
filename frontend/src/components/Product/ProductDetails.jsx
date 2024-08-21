@@ -21,8 +21,10 @@ import {
 } from "@mui/material";
 import { Rating } from "@mui/material";
 import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ match }) => {
+  const {id}=useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -30,9 +32,9 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetails
   );
 
-  const { success, error: reviewError } = useSelector(
-    (state) => state.newReview
-  );
+  // const { success, error: reviewError } = useSelector(
+  //   (state) => state.newReview
+  // );
 
   const options = {
     size: "large",
@@ -71,10 +73,11 @@ const ProductDetails = ({ match }) => {
 
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
+    
 
     myForm.set("rating", rating);
     myForm.set("comment", comment);
-    myForm.set("productId", match.params.id);
+    myForm.set("productId", id);
 
     dispatch(newReview(myForm));
 
@@ -87,17 +90,17 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    if (reviewError) {
-      alert.error(reviewError);
-      dispatch(clearErrors());
-    }
+    // if (reviewError) {
+    //   alert.error(reviewError);
+    //   dispatch(clearErrors());
+    // }
 
-    if (success) {
-      alert.success("Review Submitted Successfully");
-      dispatch({ type: NEW_REVIEW_RESET });
-    }
-    dispatch(getProductDetails(match.params.id));
-  }, [dispatch, match.params.id, error, alert, reviewError, success]);
+    // if (success) {
+    //   alert.success("Review Submitted Successfully");
+    //   dispatch({ type: NEW_REVIEW_RESET });
+    // }
+    dispatch(getProductDetails(id));
+  }, [dispatch, useParams(match), error, alert/*, reviewError, success*/]);
 
   return (
     <Fragment>

@@ -8,7 +8,7 @@ import Contact from "./components/layout/Contact/Contact";
 import About from "./components/layout/About/About";
 import Products from "./components/Product/Products"; // Ensure this is correctly imported
 import Search from "./components/Product/Search.jsx"; // Ensure this is correctly imported
-import ProductDetails from "./components/Product/ProductDetails"
+import ProductDetails from "./components/Product/ProductDetails.jsx"
 
 function App() {
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<ProductDetails/>} />
+        <Route path="/product/:id" element={<ProductDetails/>} />
         <Route path="/search" element={<Search />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
