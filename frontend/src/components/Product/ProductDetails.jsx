@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,7 +24,7 @@ import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ match }) => {
-  const {id}=useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -73,7 +73,6 @@ const ProductDetails = ({ match }) => {
 
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
-    
 
     myForm.set("rating", rating);
     myForm.set("comment", comment);
@@ -100,7 +99,7 @@ const ProductDetails = ({ match }) => {
     //   dispatch({ type: NEW_REVIEW_RESET });
     // }
     dispatch(getProductDetails(id));
-  }, [dispatch, useParams(match), error, alert/*, reviewError, success*/]);
+  }, [dispatch, useParams(match), error, alert /*, reviewError, success*/]);
 
   return (
     <Fragment>
@@ -110,7 +109,7 @@ const ProductDetails = ({ match }) => {
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
           <div className="ProductDetails">
-            <div>
+            {/* <div>
               <Carousel>
                 {product.images &&
                   product.images.map((item, i) => (
@@ -120,6 +119,31 @@ const ProductDetails = ({ match }) => {
                       src={item.url}
                       alt={`${i} Slide`}
                     />
+                  ))}
+              </Carousel>
+            </div> */}
+
+            <div >
+              <Carousel
+                showThumbs={false}
+                infiniteLoop={true}
+                showStatus={false}
+                autoPlay={true}
+                interval={3000}
+                dynamicHeight={true}
+                axis="horizontal"
+                swipeable={true}
+                emulateTouch={true}
+              >
+                {product.images &&
+                  product.images.map((item, i) => (
+                    <div key={i}>
+                      <img
+                        className="CarouselImage"
+                        src={item.url}
+                        alt={`${i} Slide`}
+                      />
+                    </div>
                   ))}
               </Carousel>
             </div>
