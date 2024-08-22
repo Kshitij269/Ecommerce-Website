@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Kshitij269/Ecommerce-Website#readme",
   "dependencies": {
+    "@types/react-router": "^5.1.20",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
@@ -29,6 +30,7 @@
     "mongoose": "^8.5.3",
     "nodemailer": "^6.9.14",
     "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "validator": "^13.12.0"
   },
   "devDependencies": {

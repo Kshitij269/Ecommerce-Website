@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import {productsReducer,productDetailsReducer} from './reducers/productReducers'; // Import your slices here
+import { productsReducer, productDetailsReducer } from './reducers/productReducers'; // Import your slices here
 
 
 // Combine reducers
@@ -20,9 +20,7 @@ const initialState = {
 // Configure the store
 const store = configureStore({
   reducer,
-  preloadedState: initialState, // Preloaded state if necessary
-  // Middleware is automatically included by default, including thunk
-  // But you can customize the middleware if needed
+  preloadedState: initialState,
 });
 
 export default store;

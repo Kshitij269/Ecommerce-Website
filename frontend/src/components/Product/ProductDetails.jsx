@@ -27,6 +27,7 @@ const ProductDetails = ({ match }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
+  const { id } = useParams(); // Replaces match.params.id
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -38,7 +39,7 @@ const ProductDetails = ({ match }) => {
 
   const options = {
     size: "large",
-    value: product.ratings,
+    value: product?.ratings || 0, // Handle potential undefined product
     readOnly: true,
     precision: 0.5,
   };
@@ -63,12 +64,12 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
-    dispatch(addItemsToCart(match.params.id, quantity));
+    dispatch(addItemsToCart(id, quantity));
     alert.success("Item Added To Cart");
   };
 
   const submitReviewToggle = () => {
-    open ? setOpen(false) : setOpen(true);
+    setOpen(!open);
   };
 
   const reviewSubmitHandler = () => {
@@ -169,7 +170,7 @@ const ProductDetails = ({ match }) => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.Stock < 1}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -188,13 +189,13 @@ const ProductDetails = ({ match }) => {
                 Description : <p>{product.description}</p>
               </div>
 
-              <button onClick={submitReviewToggle} className="submitReview">
+              {/* <button onClick={submitReviewToggle} className="submitReview">
                 Submit Review
-              </button>
+              </button> */}
             </div>
           </div>
 
-          <h3 className="reviewsHeading">REVIEWS</h3>
+          {/* <h3 className="reviewsHeading">REVIEWS</h3>
 
           <Dialog
             aria-labelledby="simple-dialog-title"
@@ -227,16 +228,15 @@ const ProductDetails = ({ match }) => {
             </DialogActions>
           </Dialog>
 
-          {product.reviews && product.reviews[0] ? (
+          {product.reviews && product.reviews.length > 0 ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))}
+              {product.reviews.map((review) => (
+                <ReviewCard key={review._id} review={review} />
+              ))}
             </div>
           ) : (
             <p className="noReviews">No Reviews Yet</p>
-          )}
+          )} */}
         </Fragment>
       )}
     </Fragment>
