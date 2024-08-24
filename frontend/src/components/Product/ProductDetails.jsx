@@ -24,7 +24,7 @@ import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ match }) => {
-  const { id } = useParams();
+  
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams(); // Replaces match.params.id
