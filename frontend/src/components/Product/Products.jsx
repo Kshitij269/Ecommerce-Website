@@ -3,7 +3,7 @@ import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import Loader from "../layout/Loader/Loader";
-import ProductCard from "../Home/ProductCard";
+import ProductCard from "../Home/ProductCard"
 import ReactPaginate from "react-paginate";
 import Slider from "@mui/material/Slider";
 import { useAlert } from "react-alert";
@@ -27,7 +27,7 @@ const Products = ({ match }) => {
   const alert = useAlert();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState([0, 30000]);
   const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
@@ -53,10 +53,10 @@ const Products = ({ match }) => {
   let count = filteredProductsCount;
 
   useEffect(() => {
-    // if (error) {
-    //   alert.error(error);
-    //   dispatch(clearErrors());
-    // }
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
 
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
@@ -71,7 +71,7 @@ const Products = ({ match }) => {
           <h2 className="productsHeading">Products</h2>
 
           <div className="products">
-          {products &&
+            {products &&
               products.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
@@ -85,7 +85,7 @@ const Products = ({ match }) => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={25000}
+              max={30000}
             />
 
             <Typography>Categories</Typography>
