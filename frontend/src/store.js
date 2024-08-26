@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { productsReducer, productDetailsReducer } from './reducers/productReducers'; // Import your slices here
+import {allUsersReducer,forgotPasswordReducer,profileReducer,userDetailsReducer,userReducer} from "./reducers/userReducers"
 
 
 // Combine reducers
 const reducer = combineReducers({
+  user:userReducer,
   products: productsReducer,
   productDetails: productDetailsReducer,
 });
