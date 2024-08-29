@@ -20,11 +20,10 @@ import {
   Button,
 } from "@mui/material";
 import { Rating } from "@mui/material";
-import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ match }) => {
-  
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams(); // Replaces match.params.id
@@ -33,9 +32,9 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetails
   );
 
-  // const { success, error: reviewError } = useSelector(
-  //   (state) => state.newReview
-  // );
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
 
   const options = {
     size: "large",
@@ -90,17 +89,17 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    // if (reviewError) {
-    //   alert.error(reviewError);
-    //   dispatch(clearErrors());
-    // }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
 
-    // if (success) {
-    //   alert.success("Review Submitted Successfully");
-    //   dispatch({ type: NEW_REVIEW_RESET });
-    // }
+    if (success) {
+      alert.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
     dispatch(getProductDetails(id));
-  }, [dispatch, useParams(match), error, alert /*, reviewError, success*/]);
+  }, [dispatch, useParams(match), error, alert, reviewError, success]);
 
   return (
     <Fragment>
@@ -111,20 +110,6 @@ const ProductDetails = ({ match }) => {
           <MetaData title={`${product.name} -- ECOMMERCE`} />
           <div className="ProductDetails">
             {/* <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-            </div> */}
-
-            <div >
               <Carousel
                 showThumbs={false}
                 infiniteLoop={true}
@@ -146,6 +131,29 @@ const ProductDetails = ({ match }) => {
                       />
                     </div>
                   ))}
+              </Carousel>
+            </div> */}
+            <div className="carousel-container">
+              <Carousel
+                showThumbs={false}
+                infiniteLoop={true}
+                showStatus={false}
+                autoPlay={true}
+                interval={3000}
+                dynamicHeight={true}
+                axis="horizontal"
+                swipeable={true}
+                emulateTouch={true}
+              >
+                {product?.images?.map((item, i) => (
+                  <div key={i}>
+                    <img
+                      className="carousel-image"
+                      src={item.url}
+                      alt={`Slide ${i}`}
+                    />
+                  </div>
+                ))}
               </Carousel>
             </div>
 
