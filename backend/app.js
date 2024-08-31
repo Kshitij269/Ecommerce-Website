@@ -4,6 +4,7 @@ const cors = require('cors');
 const errorMiddleWare = require("./middleware/error");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const fileUpload=require("express-fileupload");
 
 
 // Configure CORS
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 const product = require("./routes/productRoutes");
 const user = require("./routes/userRoutes");

@@ -1,23 +1,23 @@
 
 import React, { Fragment, useState } from "react";
 import "./Header.css";
-import { SpeedDial, SpeedDialAction } from "@mui/lab";
-import Backdrop from "@mui/core/Backdrop";
-import DashboardIcon from "@mui/icons/Dashboard";
-import PersonIcon from "@mui/icons/Person";
-import ExitToAppIcon from "@mui/icons/ExitToApp";
-import ListAltIcon from "@mui/icons/ListAlt";
-import ShoppingCartIcon from "@mui/icons/ShoppingCart";
-import { useHistory } from "react-router-dom";
+import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import Backdrop from "@material-ui/core/Backdrop";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { logout } from "../../../actions/userAction";
+import { logout } from "../../../actions/UserAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -45,17 +45,17 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    history.push("/admin/dashboard");
+    navigate.push("/admin/dashboard");
   }
 
   function orders() {
-    history.push("/orders");
+    navigate.push("/orders");
   }
   function account() {
-    history.push("/account");
+    navigate.push("/account");
   }
   function cart() {
-    history.push("/cart");
+    navigate.push("/cart");
   }
   function logoutUser() {
     dispatch(logout());

@@ -3,36 +3,33 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const cloudinary = require("cloudinary");
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+    })
     const { name, email, password } = req.body;
-    console.log(name, email, password);
-    try {
-        const user = await User.create({
-            name,
-            email,
-            password,
-            avatar: {
-                public_id: "This is sample ID",
-                url: "This is sample URL",
-            }
-        });
+    const user = await User.create({
+        name,
+        email,
+        password,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        }
+    });
 
-        const token = user.getJWTToken();
+    const token = user.getJWTToken();
 
 
-        res.status(201).json({
-            success: true.
-                token
-        });
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            error: error
-        });
-        console.log(error)
-    }
-
+    res.status(201).json({
+        success: true.
+            token
+    });
 });
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {
