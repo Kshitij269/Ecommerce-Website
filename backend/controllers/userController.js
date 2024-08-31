@@ -6,47 +6,60 @@ const sendEmail = require("../utils/sendEmail");
 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
     const { name, email, password } = req.body;
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: "This is sample ID",
-            url: "This is sample URL",
-        }
-    });
+    console.log(name, email, password);
+    try {
+        const user = await User.create({
+            name,
+            email,
+            password,
+            avatar: {
+                public_id: "This is sample ID",
+                url: "This is sample URL",
+            }
+        });
 
-    const token = user.getJWTToken();
+        const token = user.getJWTToken();
 
 
-    res.status(201).json({
-        success: true.
-            token
-    });
+        res.status(201).json({
+            success: true.
+                token
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error
+        });
+        console.log(error)
+    }
 
 });
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {
     const { email, password } = req.body;
+    // console.log(email, password)
 
     // checking if user has given password and email both
 
     if (!email || !password) {
+        // console.log("Please Enter Email & Password")
         return next(new ErrorHandler("Please Enter Email & Password", 400));
     }
 
     const user = await User.findOne({ email }).select("+password");
-
+    // console.log(user)
     if (!user) {
+        console.log("user not found")
         return next(new ErrorHandler("Invalid email or password", 401));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
+        // console.log("Password not matched")
         return next(new ErrorHandler("Invalid email or password", 401));
     }
-
+    // console.log("Password matched")
     sendToken(user, 200, res);
 });
 

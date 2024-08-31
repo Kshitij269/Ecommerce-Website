@@ -42,14 +42,25 @@ const LoginSignUp = ({ history, location }) => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Password:", password);
 
     const myForm = new FormData();
+    myForm.append("name", name);
+    myForm.append("email", email);
+    myForm.append("password", password);
+    myForm.append("avatar", avatar);
 
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("password", password);
-    myForm.set("avatar", avatar);
-    dispatch(register(myForm));
+    const formDataObj = {};
+
+    for (let [key, value] of myForm.entries()) {
+      formDataObj[key] = value;
+    }
+
+    // console.log(formDataObj);
+
+    dispatch(register(formDataObj));
   };
 
   const registerDataChange = (e) => {
@@ -131,7 +142,7 @@ const LoginSignUp = ({ history, location }) => {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <Link to="/password/forgot">Forget Password ?</Link>
+            <Link to="/password/forgot">Forgot Password ?</Link>
             <input type="submit" value="Login" className="loginBtn" />
           </form>
           <form
